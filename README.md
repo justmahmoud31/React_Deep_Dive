@@ -201,3 +201,23 @@ Build Effect List (Fiber Tree)
         ↓
 Commit DOM Changes + Effects
 ```
+
+**Summary**
+
+- We have a **trigger** (something that tells React to start rendering — such as a project starting with `npm run dev` or a **state/props/context** change).
+  
+- Then the **render phase** starts (this is where React calls the component function and builds a new virtual DOM).  
+  ➤ ✅ No real DOM changes happen in this phase — **no visual output yet**.
+
+- The **Reconciler (Fiber)** compares the **new virtual DOM** with the previous one to determine what has changed.  
+  ➤ ✅ This is called **diffing**.
+
+- React builds a **list of changes** that need to be made (called the **effect list** or "mutation effects").
+
+- Then React enters the **commit phase**, where it:
+  - Applies the necessary changes to the **real DOM**.
+  - Runs lifecycle effects (e.g. `useEffect`, `useLayoutEffect`, refs).
+
+- Once the **DOM is updated**, the **browser takes over**:  
+  - It schedules a **layout + paint + composite** to visually show the changes.  
+  ➤ ✅ This is part of the **browser rendering pipeline**, not React itself.
